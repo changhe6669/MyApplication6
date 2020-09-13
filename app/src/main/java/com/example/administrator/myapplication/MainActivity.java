@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
         int m =0;
         setContentView(R.layout.activity_main);
         System.out.println(Environment.getExternalStorageDirectory());
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         StuDBHelper dbHelper = new StuDBHelper(MainActivity.this, "stu_db", null, 1);
 //得到一个可读的SQLiteDatabase对象
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -55,18 +53,6 @@ public class MainActivity extends AppCompatActivity {
         }
 //关闭数据库
         db.close();
-
-
-        SetWallPaper();
-        SetLockWallPaper();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
 
@@ -101,55 +87,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void SetWallPaper() {
-        WallpaperManager mWallManager = WallpaperManager.getInstance(this);
-        String imageFilesPath = "timg.jpg";
-        Bitmap bitmap = getBitmapFromAsset(this, imageFilesPath);
-        try {
-            mWallManager.setBitmap(bitmap);
-            System.out.println("设置成功");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void SetLockWallPaper() {
-        // TODO Auto-generated method stub
-        String imageFilesPath = "timg.jpg";
-        try {
-            WallpaperManager mWallManager = WallpaperManager.getInstance(this);
-            Class class1 = mWallManager.getClass();//获取类名
-            Method setWallPaperMethod = class1.getMethod("setBitmapToLockWallpaper", Bitmap.class);//获取设置锁屏壁纸的函数
-            setWallPaperMethod.invoke(mWallManager, getBitmapFromAsset(this, imageFilesPath));//调用锁屏壁纸的函数，并指定壁纸的路径imageFilesPath
-            System.out.println("设置锁屏成功");
-        } catch (Throwable e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-    }
-
-    public static Bitmap getBitmapFromAsset(Context context, String filePath) {
-        AssetManager assetManager = context.getAssets();
-        InputStream istr = null;
-        Bitmap bitmap = null;
-        try {
-            istr = assetManager.open(filePath);
-            bitmap = BitmapFactory.decodeStream(istr);
-        } catch (IOException e) {
-            // handle exception
-        } finally {
-            if (istr != null) {
-                try {
-                    istr.close();
-                } catch (IOException ignored) {
-                }
-            }
-        }
-
-        return bitmap;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
