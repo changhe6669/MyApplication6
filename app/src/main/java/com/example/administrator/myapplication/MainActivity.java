@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int m =0;
         setContentView(R.layout.activity_main);
         System.out.println(Environment.getExternalStorageDirectory());
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
