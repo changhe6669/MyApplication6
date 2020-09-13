@@ -9,18 +9,26 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"/>
 
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addData"
+            android:text="增加一些数据进来"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text"
-            android:text="这是一个数据库测试用例"/>
-
+            android:id="@+id/jobShow"/>
 
     </LinearLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>

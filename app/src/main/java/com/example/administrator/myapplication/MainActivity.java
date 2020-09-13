@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -17,42 +18,64 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+    private Button btnAddData = null;
+    private EditText editText = null;
+    private TextView textView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int m =0;
         setContentView(R.layout.activity_main);
-        System.out.println(Environment.getExternalStorageDirectory());
-        StuDBHelper dbHelper = new StuDBHelper(MainActivity.this, "stu_db", null, 1);
-//得到一个可读的SQLiteDatabase对象
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
+        btnAddData = (Button) findViewById(R.id.addData);
+        editText = (EditText) findViewById(R.id.editText);
+        textView = (TextView) findViewById(R.id.jobShow);
         ContentValues cv = new ContentValues();
 //往ContentValues对象存放数据，键-值对模式
         cv.put("id", 1);
         cv.put("sname", "xiaoming");
         cv.put("sage", 21);
         cv.put("ssex", "male");
-//调用insert方法，将数据插入数据库
-        db.insert("stu_table", null, cv);
-//关闭数据库
-        Cursor cursor = db.query("stu_table", new String[]{"id", "sname", "sage", "ssex"}, "id=?", new String[]{"1"}, null, null, null);
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(cursor.getColumnIndex("sname"));
-            String age = cursor.getString(cursor.getColumnIndex("sage"));
-            String sex = cursor.getString(cursor.getColumnIndex("ssex"));
-            System.out.println("query------->" + "姓名：" + name + " " + "年龄：" + age + " " + "性别：" + sex);
-        }
-//关闭数据库
-        db.close();
+        OperateDatabase.initDatabase(MainActivity.this).insert("stu_table", null, cv);
+
+
+        btnAddData.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String myJob = editText.getText().toString();
+                String nowDate = String.valueOf(new Date()).substring(0, 10);
+                ContentValues cv = new ContentValues();
+//往ContentValues对象存放数据，键-值对模式
+                cv.put("date", nowDate);
+                cv.put("job", myJob);
+                OperateDatabase.initDatabase(MainActivity.this).insert("my_job", null, cv);
+
+//
+                SQLiteDatabase db = OperateDatabase.initDatabase(MainActivity.this);
+                Cursor cursor = db.query("my_job", new String[]{"date", "job"}, "date=?", new String[]{String.valueOf(new Date()).substring(0, 10)}, null, null, null);
+                String job = "";
+                while (cursor.moveToNext()) {
+                    job = job + cursor.getString(cursor.getColumnIndex("date"));
+                    job = job + cursor.getString(cursor.getColumnIndex("job")) + "\n";
+                }
+                textView.setText(job);
+
+                Bitmap bitmap=BitMapPro.createWatermark(ReturnBitmap.getBitmapFromAsset(MainActivity.this,"timg.jpg"),job);
+
+                SetScreen.SetWallPaper(MainActivity.this,bitmap);
+
+            }
+        });
     }
 
 
