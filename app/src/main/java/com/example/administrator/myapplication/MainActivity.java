@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
                     job = job + cursor.getString(cursor.getColumnIndex("job")) + "\n";
                 }
                 textView.setText(job);
-
-                Bitmap bitmap=BitMapPro.createWatermark(ReturnBitmap.getBitmapFromAsset(MainActivity.this,"timg.jpg"),job);
+                System.out.println(job);
+//                Bitmap bitmap=BitMapPro.createWatermark(ReturnBitmap.getBitmapFromAsset(MainActivity.this,"timg.jpg"),job);
+                Bitmap bitmap=BitMapPro.addWaterMark1(ReturnBitmap.getBitmapFromAsset(MainActivity.this,"timg.jpg"),job,MainActivity.this);
 
                 SetScreen.SetWallPaper(MainActivity.this,bitmap);
 

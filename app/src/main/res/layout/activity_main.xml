@@ -8,27 +8,43 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <EditText
-            android:layout_width="wrap_content"
+            android:layout_width="900px"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"/>
-
+            android:id="@+id/editText"
+            android:background="@drawable/edit_bg"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/addData"
-            android:text="增加一些数据进来"
+            android:text="添加一条任务"
             />
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/jobShow"/>
+            android:layout_height="fill_parent"
+            android:scrollbars="vertical"
+            android:textIsSelectable="true"
+            android:id="@+id/jobShow"
+            android:background="@drawable/edit_bg"/>
+
 
     </LinearLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/NavigationView_FABtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:elevation="3dp"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"/>
 
 </android.support.design.widget.CoordinatorLayout>
