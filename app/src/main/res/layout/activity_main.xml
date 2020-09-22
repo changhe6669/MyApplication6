@@ -7,7 +7,9 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center_horizontal"
         android:layout_gravity="center"
@@ -27,24 +29,14 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="900px"
             android:layout_height="fill_parent"
             android:scrollbars="vertical"
             android:textIsSelectable="true"
             android:id="@+id/jobShow"
             android:background="@drawable/edit_bg"/>
 
-
     </LinearLayout>
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/NavigationView_FABtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:elevation="3dp"
-        app:layout_anchorGravity="bottom|right|end"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.5"/>
 
 </android.support.design.widget.CoordinatorLayout>

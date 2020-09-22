@@ -40,14 +40,8 @@ public class MainActivity extends AppCompatActivity {
         btnAddData = (Button) findViewById(R.id.addData);
         editText = (EditText) findViewById(R.id.editText);
         textView = (TextView) findViewById(R.id.jobShow);
-        ContentValues cv = new ContentValues();
-//往ContentValues对象存放数据，键-值对模式
-        cv.put("id", 1);
-        cv.put("sname", "xiaoming");
-        cv.put("sage", 21);
-        cv.put("ssex", "male");
-        OperateDatabase.initDatabase(MainActivity.this).insert("stu_table", null, cv);
 
+        initPreface();
 
         btnAddData.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -64,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 SQLiteDatabase db = OperateDatabase.initDatabase(MainActivity.this);
                 Cursor cursor = db.query("my_job", new String[]{"date", "job"}, "date=?", new String[]{String.valueOf(new Date()).substring(0, 10)}, null, null, null);
                 String job = "";
+
                 while (cursor.moveToNext()) {
                     job = job + cursor.getString(cursor.getColumnIndex("date"));
                     job = job + cursor.getString(cursor.getColumnIndex("job")) + "\n";
@@ -74,9 +69,23 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitmap=BitMapPro.addWaterMark1(ReturnBitmap.getBitmapFromAsset(MainActivity.this,"timg.jpg"),job,MainActivity.this);
 
                 SetScreen.SetWallPaper(MainActivity.this,bitmap);
+                db.close();
 
             }
         });
+    }
+
+
+    public void initPreface(){
+        SQLiteDatabase db = OperateDatabase.initDatabase(MainActivity.this);
+        Cursor cursor = db.query("my_job", new String[]{"date", "job"}, "date=?", new String[]{String.valueOf(new Date()).substring(0, 10)}, null, null, null);
+        String job = "";
+        while (cursor.moveToNext()) {
+            job = job + cursor.getString(cursor.getColumnIndex("date"));
+            job = job + cursor.getString(cursor.getColumnIndex("job")) + "\n";
+        }
+        textView.setText(job);
+        db.close();
     }
 
 
