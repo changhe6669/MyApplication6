@@ -48,14 +48,14 @@ public class BitMapPro {
         //启用抗锯齿和使用设备的文本字距
         TextPaint textPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG | Paint.DEV_KERN_TEXT_FLAG);
         //字体的相关设置
-        textPaint.setTextSize(35.0f);//字体大小
+        textPaint.setTextSize(50.0f);//字体大小
         textPaint.setTypeface(Typeface.DEFAULT_BOLD);
         textPaint.setColor(Color.RED);
         textPaint.setShadowLayer(3f, 1, 1,context.getResources().getColor(android.R.color.background_dark));
-        StaticLayout layout = new StaticLayout(water, textPaint, 500,
+        StaticLayout layout = new StaticLayout(water, textPaint, 800,
                 Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
         canvas.save();
-        canvas.translate((float)(w*0.1), (float) (h*0.1));//
+        canvas.translate((float)(w*0.1), (float) (h*0.05));//
         layout.draw(canvas);
         canvas.save();
         return tarBitmap;

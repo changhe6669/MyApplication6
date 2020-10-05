@@ -15,32 +15,34 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <EditText
-            android:layout_width="900px"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:background="@drawable/edit_bg"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/addData"
-            android:text="添加一条任务"
-            />
-
         <TextView
+            android:paddingTop="50px"
             android:layout_width="900px"
             android:layout_height="1500px"
             android:scrollbars="vertical"
             android:textIsSelectable="true"
-            android:id="@+id/jobShow"
+            android:id="@+id/showDetail"
             android:background="@drawable/edit_bg"/>
-        <Button
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/checkNum"
-            android:text="查看完成"
-            />
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="900px"
+                android:layout_height="wrap_content"
+                android:id="@+id/currentNum"
+                android:background="@drawable/edit_bg"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/addNum"
+                android:text="添加一条任务"
+                />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

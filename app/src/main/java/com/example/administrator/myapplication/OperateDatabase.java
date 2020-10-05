@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 public class OperateDatabase {
 
     //构建初始化可写入权限的数据库
-    public static SQLiteDatabase initDatabase(Context context) {
+    public static SQLiteDatabase initJobDatabase(Context context) {
         StuDBHelper dbHelper = new StuDBHelper(context, "my_job", null, 1);
 //得到一个可读的SQLiteDatabase对象
-        dbHelper.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS  my_job (date varchar(40), job varchar(300))");
+        dbHelper.getWritableDatabase().execSQL("CREATE TABLE IF NOT EXISTS  my_job (date varchar(40), job varchar(300),num varchar(20))");
         return dbHelper.getWritableDatabase();
     }
 }
